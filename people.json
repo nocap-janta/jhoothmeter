@@ -1,0 +1,620 @@
+[
+ {
+  "id": "abhisar-sharma",
+  "name": "Abhisar Sharma",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "ajit-anjum",
+  "name": "Ajit Anjum",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "aman-chopra",
+  "name": "Aman Chopra",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "amish-devgan",
+  "name": "Amish Devgan",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "anand-narasimhan",
+  "name": "Anand Narasimhan",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "anjana-om-kashyap",
+  "name": "Anjana Om Kashyap",
+  "cat": "TV Anchor",
+  "gender": "f"
+ },
+ {
+  "id": "anurag-dwary",
+  "name": "Anurag Dwary",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "arnab-goswami",
+  "name": "Arnab Goswami",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "ashok-shrivastav",
+  "name": "Ashok Shrivastav",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "barkha-dutt",
+  "name": "Barkha Dutt",
+  "cat": "TV Anchor",
+  "gender": "f"
+ },
+ {
+  "id": "chitra-tripathi",
+  "name": "Chitra Tripathi",
+  "cat": "TV Anchor",
+  "gender": "f"
+ },
+ {
+  "id": "deepak-chaurasia",
+  "name": "Deepak Chaurasia",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "dibang",
+  "name": "Dibang",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "faye-d-souza",
+  "name": "Faye D'Souza",
+  "cat": "TV Anchor",
+  "gender": "f"
+ },
+ {
+  "id": "gaurav-sawant",
+  "name": "Gaurav Sawant",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "karan-thapar",
+  "name": "Karan Thapar",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "manak-gupta",
+  "name": "Manak Gupta",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "maria-shakil",
+  "name": "Maria Shakil",
+  "cat": "TV Anchor",
+  "gender": "f"
+ },
+ {
+  "id": "navika-kumar",
+  "name": "Navika Kumar",
+  "cat": "TV Anchor",
+  "gender": "f"
+ },
+ {
+  "id": "nidhi-razdan",
+  "name": "Nidhi Razdan",
+  "cat": "TV Anchor",
+  "gender": "f"
+ },
+ {
+  "id": "padmaja-joshi",
+  "name": "Padmaja Joshi",
+  "cat": "TV Anchor",
+  "gender": "f"
+ },
+ {
+  "id": "palki-sharma",
+  "name": "Palki Sharma",
+  "cat": "TV Anchor",
+  "gender": "f"
+ },
+ {
+  "id": "preeti-choudhry",
+  "name": "Preeti Choudhry",
+  "cat": "TV Anchor",
+  "gender": "f"
+ },
+ {
+  "id": "rahul-shivshankar",
+  "name": "Rahul Shivshankar",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "rajat-sharma",
+  "name": "Rajat Sharma",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "rajdeep-sardesai",
+  "name": "Rajdeep Sardesai",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "ravish-kumar",
+  "name": "Ravish Kumar",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "rubika-liyaquat",
+  "name": "Rubika Liyaquat",
+  "cat": "TV Anchor",
+  "gender": "f"
+ },
+ {
+  "id": "sagarika-ghose",
+  "name": "Sagarika Ghose",
+  "cat": "TV Anchor",
+  "gender": "f"
+ },
+ {
+  "id": "saurabh-dwivedi",
+  "name": "Saurabh Dwivedi",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "shiv-aroor",
+  "name": "Shiv Aroor",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "smita-prakash",
+  "name": "Smita Prakash",
+  "cat": "TV Anchor",
+  "gender": "f"
+ },
+ {
+  "id": "sudhir-chaudhary",
+  "name": "Sudhir Chaudhary",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "sushant-sinha",
+  "name": "Sushant Sinha",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "sweta-singh",
+  "name": "Sweta Singh",
+  "cat": "TV Anchor",
+  "gender": "f"
+ },
+ {
+  "id": "vikram-chandra",
+  "name": "Vikram Chandra",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "vishnu-som",
+  "name": "Vishnu Som",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "zakka-jacob",
+  "name": "Zakka Jacob",
+  "cat": "TV Anchor",
+  "gender": "m"
+ },
+ {
+  "id": "aakar-patel",
+  "name": "Aakar Patel",
+  "cat": "Journalist",
+  "gender": "m"
+ },
+ {
+  "id": "aditya-raj-kaul",
+  "name": "Aditya Raj Kaul",
+  "cat": "Journalist",
+  "gender": "m"
+ },
+ {
+  "id": "ajit-bharti",
+  "name": "Ajit Bharti",
+  "cat": "Journalist",
+  "gender": "m"
+ },
+ {
+  "id": "akash-banerjee",
+  "name": "Akash Banerjee",
+  "cat": "Journalist",
+  "gender": "m"
+ },
+ {
+  "id": "arfa-khanum-sherwani",
+  "name": "Arfa Khanum Sherwani",
+  "cat": "Journalist",
+  "gender": "f"
+ },
+ {
+  "id": "kanchan-gupta",
+  "name": "Kanchan Gupta",
+  "cat": "Journalist",
+  "gender": "m"
+ },
+ {
+  "id": "mohammed-zubair",
+  "name": "Mohammed Zubair",
+  "cat": "Journalist",
+  "gender": "m"
+ },
+ {
+  "id": "nupur-j-sharma",
+  "name": "Nupur J Sharma",
+  "cat": "Journalist",
+  "gender": "f"
+ },
+ {
+  "id": "pratik-sinha",
+  "name": "Pratik Sinha",
+  "cat": "Journalist",
+  "gender": "m"
+ },
+ {
+  "id": "punya-prasun-bajpai",
+  "name": "Punya Prasun Bajpai",
+  "cat": "Journalist",
+  "gender": "m"
+ },
+ {
+  "id": "rahul-roushan",
+  "name": "Rahul Roushan",
+  "cat": "Journalist",
+  "gender": "m"
+ },
+ {
+  "id": "rana-ayyub",
+  "name": "Rana Ayyub",
+  "cat": "Journalist",
+  "gender": "f"
+ },
+ {
+  "id": "sanjay-pugalia",
+  "name": "Sanjay Pugalia",
+  "cat": "Journalist",
+  "gender": "m"
+ },
+ {
+  "id": "shekhar-gupta",
+  "name": "Shekhar Gupta",
+  "cat": "Journalist",
+  "gender": "m"
+ },
+ {
+  "id": "siddharth-varadarajan",
+  "name": "Siddharth Varadarajan",
+  "cat": "Journalist",
+  "gender": "m"
+ },
+ {
+  "id": "suhasini-haidar",
+  "name": "Suhasini Haidar",
+  "cat": "Journalist",
+  "gender": "f"
+ },
+ {
+  "id": "swati-chaturvedi",
+  "name": "Swati Chaturvedi",
+  "cat": "Journalist",
+  "gender": "f"
+ },
+ {
+  "id": "tehseen-poonawalla",
+  "name": "Tehseen Poonawalla",
+  "cat": "Journalist",
+  "gender": "m"
+ },
+ {
+  "id": "abhijit-chavda",
+  "name": "Abhijit Chavda",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "abhishek-malhan",
+  "name": "Abhishek Malhan",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "amit-bhadana",
+  "name": "Amit Bhadana",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "ashish-chanchlani",
+  "name": "Ashish Chanchlani",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "bhuvan-bam",
+  "name": "Bhuvan Bam",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "carryminati",
+  "name": "CarryMinati",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "dhruv-rathee",
+  "name": "Dhruv Rathee",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "elvish-yadav",
+  "name": "Elvish Yadav",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "gaurav-taneja",
+  "name": "Gaurav Taneja",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "harsh-beniwal",
+  "name": "Harsh Beniwal",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "kunal-kamra",
+  "name": "Kunal Kamra",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "mortal",
+  "name": "Mortal",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "mythpat",
+  "name": "Mythpat",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "prajakta-koli",
+  "name": "Prajakta Koli",
+  "cat": "YouTuber",
+  "gender": "f"
+ },
+ {
+  "id": "raj-shamani",
+  "name": "Raj Shamani",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "rajiv-malhotra",
+  "name": "Rajiv Malhotra",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "ranveer-allahbadia",
+  "name": "Ranveer Allahbadia",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "samay-raina",
+  "name": "Samay Raina",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "sandeep-maheshwari",
+  "name": "Sandeep Maheshwari",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "sourav-joshi",
+  "name": "Sourav Joshi",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "tanmay-bhat",
+  "name": "Tanmay Bhat",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "technical-guruji",
+  "name": "Technical Guruji",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "techno-gamerz",
+  "name": "Techno Gamerz",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "triggered-insaan",
+  "name": "Triggered Insaan",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "vivek-bindra",
+  "name": "Vivek Bindra",
+  "cat": "YouTuber",
+  "gender": "m"
+ },
+ {
+  "id": "akshat-shrivastava",
+  "name": "Akshat Shrivastava",
+  "cat": "Influencer",
+  "gender": "m"
+ },
+ {
+  "id": "alakh-pandey",
+  "name": "Alakh Pandey",
+  "cat": "Influencer",
+  "gender": "m"
+ },
+ {
+  "id": "aman-gupta",
+  "name": "Aman Gupta",
+  "cat": "Influencer",
+  "gender": "m"
+ },
+ {
+  "id": "ankit-baiyanpuria",
+  "name": "Ankit Baiyanpuria",
+  "cat": "Influencer",
+  "gender": "m"
+ },
+ {
+  "id": "ankur-warikoo",
+  "name": "Ankur Warikoo",
+  "cat": "Influencer",
+  "gender": "m"
+ },
+ {
+  "id": "anupam-mittal",
+  "name": "Anupam Mittal",
+  "cat": "Influencer",
+  "gender": "m"
+ },
+ {
+  "id": "ashneer-grover",
+  "name": "Ashneer Grover",
+  "cat": "Influencer",
+  "gender": "m"
+ },
+ {
+  "id": "baba-ramdev",
+  "name": "Baba Ramdev",
+  "cat": "Influencer",
+  "gender": "m"
+ },
+ {
+  "id": "dhirendra-krishna-shastri",
+  "name": "Dhirendra Krishna Shastri",
+  "cat": "Influencer",
+  "gender": "m"
+ },
+ {
+  "id": "dolly-chaiwala",
+  "name": "Dolly Chaiwala",
+  "cat": "Influencer",
+  "gender": "m"
+ },
+ {
+  "id": "gaur-gopal-das",
+  "name": "Gaur Gopal Das",
+  "cat": "Influencer",
+  "gender": "m"
+ },
+ {
+  "id": "jaya-kishori",
+  "name": "Jaya Kishori",
+  "cat": "Influencer",
+  "gender": "f"
+ },
+ {
+  "id": "khan-sir",
+  "name": "Khan Sir",
+  "cat": "Influencer",
+  "gender": "m"
+ },
+ {
+  "id": "kusha-kapila",
+  "name": "Kusha Kapila",
+  "cat": "Influencer",
+  "gender": "f"
+ },
+ {
+  "id": "nikhil-kamath",
+  "name": "Nikhil Kamath",
+  "cat": "Influencer",
+  "gender": "m"
+ },
+ {
+  "id": "orry",
+  "name": "Orry",
+  "cat": "Influencer",
+  "gender": "m"
+ },
+ {
+  "id": "pranjal-kamra",
+  "name": "Pranjal Kamra",
+  "cat": "Influencer",
+  "gender": "m"
+ },
+ {
+  "id": "rachana-ranade",
+  "name": "Rachana Ranade",
+  "cat": "Influencer",
+  "gender": "f"
+ },
+ {
+  "id": "sadhguru",
+  "name": "Sadhguru",
+  "cat": "Influencer",
+  "gender": "m"
+ },
+ {
+  "id": "sharan-hegde",
+  "name": "Sharan Hegde",
+  "cat": "Influencer",
+  "gender": "m"
+ },
+ {
+  "id": "uorfi-javed",
+  "name": "Uorfi Javed",
+  "cat": "Influencer",
+  "gender": "f"
+ },
+ {
+  "id": "vikas-divyakirti",
+  "name": "Vikas Divyakirti",
+  "cat": "Influencer",
+  "gender": "m"
+ }
+]

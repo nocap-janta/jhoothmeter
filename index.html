@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JhoothMeter – No cap. Janta decides.</title>
+<meta name="description" content="Vote anonymously on which media personalities mislead you the most. A public opinion poll. One tap, one vote, zero login.">
+<meta property="og:title" content="JhoothMeter – No cap. Janta decides.">
+<meta property="og:description" content="Your feed, your verdict. Vote anonymously on 100+ anchors, YouTubers and influencers.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1A1033">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤥</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Hind:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1A1033; --ink2:#2A1B52; --paper:#F3EFFF; --card:#fff; --muted:#6B6485;
+  --red:#FF3B30; --yellow:#FFD60A; --line:#E2DBF7; --bar-h:56px;
+  --display:'Bricolage Grotesque','Arial Black',system-ui,sans-serif;
+  --body:'Hind',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --r:20px; --gut:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.5;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit;touch-action:manipulation}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.wrap{width:100%;max-width:1120px;margin:0 auto;padding-left:max(var(--gut),env(safe-area-inset-left));padding-right:max(var(--gut),env(safe-area-inset-right))}
+
+/* ticker */
+.ticker{background:var(--red);color:#fff;font-weight:600;font-size:12.5px;overflow:hidden;white-space:nowrap;line-height:28px}
+.ticker div{display:inline-block;animation:tick 50s linear infinite}
+.ticker span{margin:0 26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+#note{background:var(--yellow);color:var(--ink);font-size:13px;text-align:center;padding:7px var(--gut);line-height:1.35}
+#note[hidden]{display:none}
+
+/* top bar */
+.bar{position:sticky;top:0;z-index:50;background:#1A1033ee;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;padding-top:env(safe-area-inset-top)}
+.bar-in{height:var(--bar-h);display:flex;align-items:center;gap:12px}
+.logo{font-family:var(--display);font-weight:800;font-size:21px;text-decoration:none;display:inline-flex;align-items:center;white-space:nowrap;letter-spacing:-.01em}
+.logo .em{margin-right:7px}
+.logo b{background:var(--yellow);color:var(--ink);padding:1px 8px 2px;border-radius:7px;margin-left:3px}
+.tabs{display:none;gap:4px;margin-left:18px}
+.tabs button{padding:8px 16px;border-radius:999px;font-weight:600;font-size:15px;color:#cfc7ee;transition:background .2s,color .2s}
+.tabs button:hover{background:#ffffff1c;color:#fff}
+.tabs button.on{background:#fff;color:var(--ink)}
+.bar-actions{margin-left:auto;display:flex;gap:8px;align-items:center}
+.ibtn{height:40px;min-width:40px;padding:0 12px;border-radius:999px;background:#ffffff1f;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:14px;text-decoration:none;color:#fff;transition:background .2s,transform .15s}
+.ibtn:hover{background:#ffffff38}.ibtn:active{transform:scale(.94)}
+.ibtn svg{width:18px;height:18px;flex:none}
+.ibtn.hot{background:var(--red)}
+.ibtn .lbl{display:none}
+
+/* bottom nav (phones) */
+.bottom{position:fixed;left:0;right:0;bottom:0;z-index:60;display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -6px 24px #1a103314}
+.bottom button{display:flex;flex-direction:column;align-items:center;gap:1px;padding:8px 0 7px;font-size:11.5px;font-weight:600;color:var(--muted);position:relative}
+.bottom button .ic{font-size:22px;line-height:1.1;transition:transform .2s}
+.bottom button.on{color:var(--ink)}
+.bottom button.on .ic{transform:translateY(-2px) scale(1.12)}
+.bottom button.on::after{content:"";position:absolute;top:0;left:30%;right:30%;height:3px;border-radius:0 0 4px 4px;background:var(--red)}
+
+/* hero */
+.hero{background:radial-gradient(800px 360px at 90% -20%,#5a35d855,transparent 70%),radial-gradient(520px 280px at 0% 110%,#ff3b3030,transparent 70%),var(--ink);color:#fff;position:relative;overflow:hidden;border-radius:0 0 30px 30px}
+.hero .trace{position:absolute;left:0;bottom:6px;width:200%;height:70px;color:var(--yellow);opacity:.22;animation:flow 14s linear infinite;pointer-events:none}
+@keyframes flow{to{transform:translateX(-50%)}}
+.hero-in{position:relative;display:grid;gap:22px;padding-top:22px;padding-bottom:40px;grid-template-areas:'copy' 'hot' 'extras'}
+.copy{grid-area:copy}.hotcard{grid-area:hot}.extras{grid-area:extras}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,10.5vw,78px);line-height:.98;letter-spacing:-.025em;text-wrap:balance}
+.hero h1 em{font-style:normal;color:var(--yellow)}
+.hero p.lead{margin-top:12px;max-width:44ch;color:#d8d1f3;font-size:16px}
+.stats{display:flex;gap:10px;flex-wrap:wrap}
+.stat{background:#ffffff17;border:1px solid #ffffff14;border-radius:14px;padding:8px 14px;font-size:13px;min-width:92px;color:#d8d1f3}
+.stat b{display:block;font-family:var(--display);font-size:24px;line-height:1.2;color:var(--yellow)}
+.cta{margin-top:18px;display:inline-flex;gap:8px;align-items:center;background:var(--yellow);color:var(--ink);font-weight:700;padding:14px 24px;border-radius:999px;text-decoration:none;box-shadow:0 8px 24px #ffd60a33;transition:transform .15s,box-shadow .2s}
+.cta:hover{transform:translateY(-2px);box-shadow:0 12px 28px #ffd60a4d}.cta:active{transform:scale(.97)}
+
+/* hot seat */
+.hotcard{background:#fff;color:var(--ink);border-radius:26px;padding:16px 18px 18px;box-shadow:0 20px 50px #0000004d;position:relative;transition:transform .3s}
+.hotcard:hover{transform:rotate(0)}
+@media(min-width:900px){.hotcard{transform:rotate(1.6deg)}}
+.hot-top{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.hot-top span:first-child{background:var(--red);color:#fff;padding:3px 10px;border-radius:999px}
+.hot-top span:last-child{color:var(--muted)}
+.hot-body{display:flex;flex-direction:column;align-items:center;text-align:center;padding:10px 0 2px;animation:slideIn .35s ease}
+@keyframes slideIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+.hot-body .av{width:96px;height:96px;font-size:54px;margin-bottom:8px}
+.hot-body h3{font-family:var(--display);font-size:24px;line-height:1.15;overflow-wrap:anywhere}
+.hot-body .cat{margin-top:4px}
+.hot-actions{display:flex;gap:10px;margin-top:16px;width:100%}
+.hot-actions .like{flex:1;justify-content:center;height:54px;font-size:17px}
+.skip{height:54px;padding:0 20px;border-radius:999px;background:var(--paper);font-weight:700;transition:background .2s,transform .15s}
+.skip:hover{background:#e6defb}.skip:active{transform:scale(.95)}
+
+/* controls */
+.controls{position:sticky;top:calc(var(--bar-h) + env(safe-area-inset-top));z-index:30;background:#F3EFFFf2;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);padding:14px 0 8px;border-bottom:1px solid var(--line);margin:0 calc(-1 * var(--gut));padding-left:var(--gut);padding-right:var(--gut)}
+.searchbox{position:relative}
+.searchbox::before{content:"🔎";position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:16px;opacity:.7}
+.search{width:100%;height:48px;padding:0 16px 0 42px;border-radius:14px;border:2px solid var(--line);background:#fff;font:inherit;font-size:16px;transition:border-color .2s,box-shadow .2s}
+.search:focus{border-color:var(--ink);outline:0;box-shadow:0 0 0 4px #1a103314}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 2px 4px;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 92%,transparent);mask-image:linear-gradient(90deg,#000 92%,transparent)}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;height:36px;padding:0 15px;border-radius:999px;border:2px solid var(--line);background:#fff;font-weight:600;font-size:14px;transition:all .15s}
+.chip:hover{border-color:var(--ink)}.chip:active{transform:scale(.95)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.sortrow{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13.5px;color:var(--muted);padding-top:4px}
+.sortrow select{font:inherit;border:0;background:none;font-weight:700;color:var(--ink);padding:4px 0}
+
+/* cards */
+.grid{display:grid;grid-template-columns:1fr;gap:10px;padding:14px 0 40px}
+.card{background:var(--card);border-radius:var(--r);padding:12px;display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:12px;align-items:center;border:2px solid transparent;box-shadow:0 1px 0 var(--line),0 6px 18px #1a10330a;transition:transform .18s,box-shadow .18s,border-color .18s}
+.card:hover{transform:translateY(-2px);box-shadow:0 1px 0 var(--line),0 12px 28px #1a103324}
+.card.mine{border-color:var(--red);background:linear-gradient(0deg,#fff,#fff5f4)}
+.av{flex:none;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-size:32px;line-height:1;position:relative;box-shadow:inset 0 0 0 3px #fff}
+.rank{position:absolute;left:-5px;top:-5px;background:var(--ink);color:#fff;font-family:var(--body);font-size:11px;min-width:22px;height:22px;border-radius:11px;display:grid;place-items:center;font-weight:700;padding:0 5px;line-height:1}
+.info{min-width:0}
+.info h3{font-family:var(--display);font-size:16.5px;line-height:1.2;overflow-wrap:anywhere}
+.cat{display:inline-block;font-size:12px;font-weight:600;color:var(--muted);background:var(--paper);padding:1px 9px;border-radius:999px}
+.sub{display:flex;align-items:center;gap:8px;margin-top:4px}
+.meter{height:5px;background:var(--paper);border-radius:3px;margin-top:8px;overflow:hidden}
+.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--yellow),var(--red));border-radius:3px;transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.act{display:flex;gap:6px;align-items:center}
+.like{display:inline-flex;gap:7px;align-items:center;justify-content:center;min-width:72px;height:44px;padding:0 14px;border-radius:999px;background:var(--paper);font-weight:700;font-size:15.5px;transition:transform .15s,background .2s,color .2s,box-shadow .2s;box-shadow:inset 0 0 0 2px var(--line)}
+.like:hover{box-shadow:inset 0 0 0 2px var(--red)}
+.like:active{transform:scale(.9)}
+.like .e{display:inline-block;font-size:19px;filter:grayscale(1) opacity(.7);transition:filter .2s}
+.like.on{background:var(--red);color:#fff;box-shadow:0 6px 16px #ff3b3055}
+.like.on .e{filter:none;animation:pop .5s}
+.c{font-variant-numeric:tabular-nums}
+.like .t-on{display:none}.like.on .t-on{display:inline}.like.on .t-off{display:none}
+.hot-actions .c{background:#0000001a;padding:1px 9px;border-radius:999px;font-size:14px}
+.hot-actions .like.on .c{background:#ffffff33}
+.c.bump{animation:bump .35s}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.8) rotate(-14deg)}100%{transform:scale(1)}}
+@keyframes bump{40%{transform:translateY(-4px) scale(1.25)}}
+.share{width:30px;height:30px;border-radius:50%;background:var(--paper);display:grid;place-items:center;transition:background .2s,transform .15s}
+.share:hover{background:#e6defb}.share:active{transform:scale(.9)}
+.share svg{width:15px;height:15px}
+.float{position:fixed;pointer-events:none;font-size:26px;z-index:99;animation:up .9s ease-out forwards}
+@keyframes up{to{transform:translateY(-110px) scale(1.5) rotate(12deg);opacity:0}}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:44px 12px}
+
+/* pages */
+.page{display:none}.page.on{display:block;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.board{padding-top:28px;padding-bottom:40px}
+.board h2,.about h2{font-family:var(--display);font-size:clamp(28px,6vw,40px);line-height:1.1;margin-bottom:6px}
+.subtle{color:var(--muted)}
+.podium{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:10px;align-items:end;margin:28px 0 18px}
+.pod{background:#fff;border-radius:20px;padding:14px 6px 16px;text-align:center;position:relative;min-width:0;box-shadow:0 6px 18px #1a10330d}
+.pod .av{margin:0 auto 8px;width:64px;height:64px;font-size:36px}
+.pod.p1{background:linear-gradient(180deg,var(--yellow),#ffe566);padding-top:26px;padding-bottom:26px}
+.pod.p1 .av{width:76px;height:76px;font-size:44px}
+.pod .crown{position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:28px;animation:bob 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateX(-50%) translateY(-5px)}}
+.pod h3{font-family:var(--display);font-size:14.5px;line-height:1.2;overflow-wrap:anywhere;padding:0 4px}
+.pod b{display:block;font-family:var(--display);font-size:22px;margin-top:4px}
+.pod small{font-weight:700;color:var(--muted)}
+.pod.p1 small{color:var(--ink)}
+.row{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:10px;align-items:center;background:#fff;border-radius:14px;padding:12px 14px;margin-bottom:8px;position:relative;overflow:hidden;transition:transform .15s}
+.row:hover{transform:translateX(3px)}
+.row i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#FF3B3022,#FF3B3008);z-index:0}
+.row>*{position:relative}
+.row .n{font-family:var(--display);font-weight:800;color:var(--muted)}
+.row .nm{overflow-wrap:anywhere;font-weight:600}
+.row .nm small{color:var(--muted);font-weight:500;margin-left:4px}
+.row b{font-family:var(--display)}
+.about{padding-top:28px;padding-bottom:56px;max-width:760px}
+.about p,.about li{margin:10px 0;font-size:17px}
+.about ul{padding-left:22px}
+.about h2.sub{font-size:26px;margin-top:30px}
+.steps{list-style:none;counter-reset:s;padding:0}
+.steps>li{counter-increment:s;position:relative;background:#fff;border-radius:16px;padding:14px 16px 14px 56px;margin:10px 0;font-size:16.5px}
+.steps>li::before{content:counter(s);position:absolute;left:14px;top:13px;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:800}
+.box{background:#fff;border-radius:16px;padding:16px 18px;margin:20px 0;border-left:6px solid var(--red)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;background:var(--ink);color:#fff;font-weight:700;text-decoration:none;margin:6px 8px 6px 0;transition:transform .15s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px #1a103340}.btn:active{transform:scale(.97)}
+.btn.alt{background:var(--red)}
+pre{background:var(--ink);color:#f3efff;border-radius:14px;padding:14px 16px;overflow-x:auto;font-size:14px;line-height:1.55;margin:10px 0 2px}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92em;background:#1a10330f;padding:1px 6px;border-radius:6px}
+pre code{background:none;padding:0}
+footer{background:var(--ink);color:#bdb4e0;font-size:13px;padding:28px 0 calc(96px + env(safe-area-inset-bottom));margin-top:10px}
+footer p{max-width:70ch;margin-bottom:8px}
+
+/* share dialog + toast */
+dialog{border:0;border-radius:22px;padding:22px;width:min(92vw,380px);margin:auto}
+dialog::backdrop{background:#1a103399;backdrop-filter:blur(3px)}
+dialog h3{font-family:var(--display);margin-bottom:14px}
+dialog .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+dialog .opts a,dialog .opts button{padding:14px;border-radius:14px;background:var(--paper);text-align:center;font-weight:700;text-decoration:none;transition:background .2s}
+dialog .opts a:hover,dialog .opts button:hover{background:#e6defb}
+dialog .close{margin-top:10px;width:100%;padding:10px;color:var(--muted)}
+.toast{position:fixed;left:50%;bottom:calc(80px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:11px 18px;border-radius:16px;opacity:0;transition:.25s;z-index:120;font-size:14px;pointer-events:none;width:max-content;max-width:calc(100vw - 32px);text-align:center;box-shadow:0 10px 30px #0000004d}
+.toast.on{opacity:1;transform:translateX(-50%)}
+
+/* tablet / desktop */
+@media(min-width:760px){
+  :root{--gut:24px;--bar-h:64px}
+  .tabs{display:flex}.bottom{display:none}
+  .ibtn .lbl{display:inline}
+  .logo{font-size:23px}
+  .grid{grid-template-columns:repeat(2,1fr);gap:14px}
+  footer{padding-bottom:40px}
+  .toast{bottom:28px}
+  .hero-in{padding-top:44px;padding-bottom:64px}
+}
+@media(min-width:900px){
+  .hero-in{grid-template-columns:1.1fr .9fr;column-gap:48px;row-gap:0;align-content:center;grid-template-areas:'copy hot' 'extras hot'}
+  .hotcard{align-self:center}
+  .extras{margin-top:22px}
+  .hero p.lead{font-size:17px}
+  .grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:380px){.card{grid-template-columns:48px minmax(0,1fr) auto;gap:10px}.av{width:48px;height:48px;font-size:27px}.like{min-width:62px;padding:0 11px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="ticker" aria-hidden="true"><div id="tk"></div></div>
+
+<header class="bar">
+  <div class="wrap bar-in">
+    <a class="logo" href="#home" aria-label="JhoothMeter home"><span class="em">🤥</span>Jhooth<b>Meter</b></a>
+    <nav class="tabs" aria-label="Pages">
+      <button data-go="home" class="on">Vote</button>
+      <button data-go="board">Top 25</button>
+      <button data-go="join">Add a name</button>
+      <button data-go="about">About</button>
+    </nav>
+    <div class="bar-actions">
+      <button class="ibtn hot" id="fab" aria-label="Share this site">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg><span class="lbl">Share</span></button>
+      <a class="ibtn" id="ghTop" href="#" target="_blank" rel="noopener" aria-label="GitHub page">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span class="lbl">GitHub</span></a>
+    </div>
+  </div>
+</header>
+<div id="note" role="status" hidden></div>
+
+<main>
+  <section class="page on" id="p-home">
+    <div class="hero">
+      <svg class="trace" viewBox="0 0 1200 80" preserveAspectRatio="none" fill="none" aria-hidden="true"><path d="M0 40 H110 L128 40 L146 8 L170 72 L190 22 L206 40 H330 L346 28 L362 54 L378 40 H600 L600 40 H710 L728 40 L746 8 L770 72 L790 22 L806 40 H930 L946 28 L962 54 L978 40 H1200" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>
+      <div class="wrap hero-in">
+        <div class="copy">
+          <h1>No cap.<br><em>Janta</em> decides.</h1>
+          <p class="lead">Loud screens, louder lies? Your feed, your verdict. Vote anonymously and rank who misleads you the most. Facts over followers. It's a public opinion poll, not a court.</p>
+        </div>
+        <div class="hotcard" aria-live="polite">
+          <div class="hot-top"><span>🔥 Hot seat</span><span>Quick vote</span></div>
+          <div id="hot"></div>
+        </div>
+        <div class="extras">
+          <div class="stats">
+            <div class="stat"><b id="sVotes">0</b>votes cast</div>
+            <div class="stat"><b id="sPeople">0</b>names</div>
+            <div class="stat"><b id="sMine">0</b>your votes</div>
+          </div>
+          <a class="cta" href="#list" id="startVote">Browse all names ↓</a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap" id="list" style="scroll-margin-top:calc(var(--bar-h) + 6px)">
+      <div class="controls">
+        <div class="searchbox"><input class="search" id="q" type="search" placeholder="Search a name…" aria-label="Search by name" autocomplete="off"></div>
+        <div class="chips" id="chips"></div>
+        <div class="sortrow"><span id="count"></span>
+          <label>Sort: <select id="sort"><option value="top">Most voted</option><option value="az">A to Z</option><option value="mine">My votes first</option></select></label>
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="page" id="p-board">
+    <div class="wrap board">
+      <h2>Hall of Cap 🧢 Top 25</h2>
+      <p class="subtle">The people's ranking. Saved on the server, so it never resets.</p>
+      <div class="podium" id="podium"></div>
+      <div id="rows"></div>
+    </div>
+  </section>
+
+  <section class="page" id="p-join">
+    <div class="wrap about">
+      <h2>Add a name. Fix the list.</h2>
+      <p>The whole list lives in one open file on GitHub. Anyone can propose a change, and nobody needs to code to do it.</p>
+      <a class="btn alt" id="joinRepo" href="#" target="_blank" rel="noopener">Visit the GitHub page</a>
+      <h2 class="sub">Easiest: open an issue (no code)</h2>
+      <ol class="steps">
+        <li>Tap <b>Request a name</b> below. You'll need a free GitHub account.</li>
+        <li>Fill the form: <b>name</b>, <b>category</b>, <b>gender</b> (m or f, only used to pick the emoji).</li>
+        <li>Submit. A maintainer adds it.</li>
+      </ol>
+      <a class="btn" id="joinIssue" href="#" target="_blank" rel="noopener">Request a name</a>
+      <h2 class="sub">Pro move: send a pull request</h2>
+      <ol class="steps">
+        <li><b>Fork</b> the repo (button at the top right on GitHub).</li>
+        <li>Open <code>people.json</code> and tap the pencil icon to edit.</li>
+        <li>Add your entry at the end of the list, copying this shape:
+<pre><code>{
+  "id": "firstname-lastname",
+  "name": "Firstname Lastname",
+  "cat": "YouTuber",
+  "gender": "f"
+}</code></pre></li>
+        <li><code>id</code>: lowercase letters, numbers and hyphens, unique. <code>cat</code>: <code>TV Anchor</code>, <code>Journalist</code>, <code>YouTuber</code> or <code>Influencer</code>. <code>gender</code>: <code>m</code> or <code>f</code>.</li>
+        <li>Commit, then tap <b>Contribute → Open pull request</b>. A bot checks your JSON automatically.</li>
+        <li>Once merged, the site and the voting API pick the name up on their own.</li>
+      </ol>
+      <a class="btn" id="joinEdit" href="#" target="_blank" rel="noopener">Edit people.json</a>
+      <div class="box"><b>House rules:</b> public figures only (people with a public media presence in India), no private individuals, no personal details, no insults in the name field. Want a name removed or corrected? Open an issue and say why. Every request is reviewed.</div>
+    </div>
+  </section>
+
+  <section class="page" id="p-about">
+    <div class="wrap about">
+      <h2>Your feed shouldn't gaslight you.</h2>
+      <p>Anchors, YouTubers and influencers shape what millions believe. JhoothMeter gives the audience a scoreboard. Tap the 🤥 on the names you feel mislead the public and watch the ranking move.</p>
+      <ul>
+        <li><b>Anonymous:</b> no login, no email, no tracking. Your device holds a random code, and the server only stores a scrambled version of it.</li>
+        <li><b>Like-style voting:</b> tap to vote, tap again to undo. One vote per person per name.</li>
+        <li><b>Shared and persistent:</b> everyone sees the same live scores, saved on the server.</li>
+        <li><b>Free forever:</b> it runs on free tiers. If a daily limit is hit, your vote waits on your device and syncs later.</li>
+        <li><b>Spread it:</b> every card has a share button. Send your pick to the group chat.</li>
+      </ul>
+      <div class="box"><b>Important:</b> this is an opinion poll. A vote is one viewer's opinion, not a finding of fact, and the ranking says nothing about any person's intent or honesty. Names are listed because they are widely followed public figures, not because we claim anything about them. Scores can be skewed by campaigns, so read them as a mood, not a verdict.</div>
+      <p>The code, the name list and the rules are open on GitHub, so anyone can check how it works.</p>
+      <a class="btn" id="aboutRepo" href="#" target="_blank" rel="noopener">See the code on GitHub</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>JhoothMeter is an independent, unofficial public opinion poll. Results reflect the votes of anonymous visitors and may be skewed by campaigns or repeat voting. Nothing here is a statement of fact about any person.</p>
+    <p>Made with ❤️ in India. No ads, no tracking, no login.</p>
+  </div>
+</footer>
+
+<nav class="bottom" aria-label="Pages">
+  <button data-go="home" class="on"><span class="ic">🗳️</span>Vote</button>
+  <button data-go="board"><span class="ic">🏆</span>Top 25</button>
+  <button data-go="join"><span class="ic">➕</span>Add name</button>
+  <button data-go="about"><span class="ic">💬</span>About</button>
+</nav>
+
+<dialog id="dlg">
+  <h3 id="dTitle">Share JhoothMeter</h3>
+  <div class="opts">
+    <a id="dWa" target="_blank" rel="noopener">WhatsApp</a>
+    <a id="dX" target="_blank" rel="noopener">X / Twitter</a>
+    <a id="dTg" target="_blank" rel="noopener">Telegram</a>
+    <button id="dCopy">Copy link</button>
+  </div>
+  <button class="close" id="dClose">Close</button>
+</dialog>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= CONFIG: edit these 3 lines ================= */
+const CONFIG = {
+  API_URL:  '',   // your Worker URL, e.g. https://jhoothmeter-api.yourname.workers.dev  (blank = demo mode)
+  REPO_URL: 'https://github.com/YOUR-USERNAME/jhoothmeter',
+  SITE_URL: ''    // optional: your public site URL for share links (blank = current page)
+};
+
+/* Backup copy of people.json (auto-filled by scripts/embed-people.mjs). Used only if people.json can't be loaded. */
+const FALLBACK_PEOPLE = /*PEOPLE_START*/[
+{"id":"abhisar-sharma","name":"Abhisar Sharma","cat":"TV Anchor","gender":"m"},
+{"id":"ajit-anjum","name":"Ajit Anjum","cat":"TV Anchor","gender":"m"},
+{"id":"aman-chopra","name":"Aman Chopra","cat":"TV Anchor","gender":"m"},
+{"id":"amish-devgan","name":"Amish Devgan","cat":"TV Anchor","gender":"m"},
+{"id":"anand-narasimhan","name":"Anand Narasimhan","cat":"TV Anchor","gender":"m"},
+{"id":"anjana-om-kashyap","name":"Anjana Om Kashyap","cat":"TV Anchor","gender":"f"},
+{"id":"anurag-dwary","name":"Anurag Dwary","cat":"TV Anchor","gender":"m"},
+{"id":"arnab-goswami","name":"Arnab Goswami","cat":"TV Anchor","gender":"m"},
+{"id":"ashok-shrivastav","name":"Ashok Shrivastav","cat":"TV Anchor","gender":"m"},
+{"id":"barkha-dutt","name":"Barkha Dutt","cat":"TV Anchor","gender":"f"},
+{"id":"chitra-tripathi","name":"Chitra Tripathi","cat":"TV Anchor","gender":"f"},
+{"id":"deepak-chaurasia","name":"Deepak Chaurasia","cat":"TV Anchor","gender":"m"},
+{"id":"dibang","name":"Dibang","cat":"TV Anchor","gender":"m"},
+{"id":"faye-d-souza","name":"Faye D'Souza","cat":"TV Anchor","gender":"f"},
+{"id":"gaurav-sawant","name":"Gaurav Sawant","cat":"TV Anchor","gender":"m"},
+{"id":"karan-thapar","name":"Karan Thapar","cat":"TV Anchor","gender":"m"},
+{"id":"manak-gupta","name":"Manak Gupta","cat":"TV Anchor","gender":"m"},
+{"id":"maria-shakil","name":"Maria Shakil","cat":"TV Anchor","gender":"f"},
+{"id":"navika-kumar","name":"Navika Kumar","cat":"TV Anchor","gender":"f"},
+{"id":"nidhi-razdan","name":"Nidhi Razdan","cat":"TV Anchor","gender":"f"},
+{"id":"padmaja-joshi","name":"Padmaja Joshi","cat":"TV Anchor","gender":"f"},
+{"id":"palki-sharma","name":"Palki Sharma","cat":"TV Anchor","gender":"f"},
+{"id":"preeti-choudhry","name":"Preeti Choudhry","cat":"TV Anchor","gender":"f"},
+{"id":"rahul-shivshankar","name":"Rahul Shivshankar","cat":"TV Anchor","gender":"m"},
+{"id":"rajat-sharma","name":"Rajat Sharma","cat":"TV Anchor","gender":"m"},
+{"id":"rajdeep-sardesai","name":"Rajdeep Sardesai","cat":"TV Anchor","gender":"m"},
+{"id":"ravish-kumar","name":"Ravish Kumar","cat":"TV Anchor","gender":"m"},
+{"id":"rubika-liyaquat","name":"Rubika Liyaquat","cat":"TV Anchor","gender":"f"},
+{"id":"sagarika-ghose","name":"Sagarika Ghose","cat":"TV Anchor","gender":"f"},
+{"id":"saurabh-dwivedi","name":"Saurabh Dwivedi","cat":"TV Anchor","gender":"m"},
+{"id":"shiv-aroor","name":"Shiv Aroor","cat":"TV Anchor","gender":"m"},
+{"id":"smita-prakash","name":"Smita Prakash","cat":"TV Anchor","gender":"f"},
+{"id":"sudhir-chaudhary","name":"Sudhir Chaudhary","cat":"TV Anchor","gender":"m"},
+{"id":"sushant-sinha","name":"Sushant Sinha","cat":"TV Anchor","gender":"m"},
+{"id":"sweta-singh","name":"Sweta Singh","cat":"TV Anchor","gender":"f"},
+{"id":"vikram-chandra","name":"Vikram Chandra","cat":"TV Anchor","gender":"m"},
+{"id":"vishnu-som","name":"Vishnu Som","cat":"TV Anchor","gender":"m"},
+{"id":"zakka-jacob","name":"Zakka Jacob","cat":"TV Anchor","gender":"m"},
+{"id":"aakar-patel","name":"Aakar Patel","cat":"Journalist","gender":"m"},
+{"id":"aditya-raj-kaul","name":"Aditya Raj Kaul","cat":"Journalist","gender":"m"},
+{"id":"ajit-bharti","name":"Ajit Bharti","cat":"Journalist","gender":"m"},
+{"id":"akash-banerjee","name":"Akash Banerjee","cat":"Journalist","gender":"m"},
+{"id":"arfa-khanum-sherwani","name":"Arfa Khanum Sherwani","cat":"Journalist","gender":"f"},
+{"id":"kanchan-gupta","name":"Kanchan Gupta","cat":"Journalist","gender":"m"},
+{"id":"mohammed-zubair","name":"Mohammed Zubair","cat":"Journalist","gender":"m"},
+{"id":"nupur-j-sharma","name":"Nupur J Sharma","cat":"Journalist","gender":"f"},
+{"id":"pratik-sinha","name":"Pratik Sinha","cat":"Journalist","gender":"m"},
+{"id":"punya-prasun-bajpai","name":"Punya Prasun Bajpai","cat":"Journalist","gender":"m"},
+{"id":"rahul-roushan","name":"Rahul Roushan","cat":"Journalist","gender":"m"},
+{"id":"rana-ayyub","name":"Rana Ayyub","cat":"Journalist","gender":"f"},
+{"id":"sanjay-pugalia","name":"Sanjay Pugalia","cat":"Journalist","gender":"m"},
+{"id":"shekhar-gupta","name":"Shekhar Gupta","cat":"Journalist","gender":"m"},
+{"id":"siddharth-varadarajan","name":"Siddharth Varadarajan","cat":"Journalist","gender":"m"},
+{"id":"suhasini-haidar","name":"Suhasini Haidar","cat":"Journalist","gender":"f"},
+{"id":"swati-chaturvedi","name":"Swati Chaturvedi","cat":"Journalist","gender":"f"},
+{"id":"tehseen-poonawalla","name":"Tehseen Poonawalla","cat":"Journalist","gender":"m"},
+{"id":"abhijit-chavda","name":"Abhijit Chavda","cat":"YouTuber","gender":"m"},
+{"id":"abhishek-malhan","name":"Abhishek Malhan","cat":"YouTuber","gender":"m"},
+{"id":"amit-bhadana","name":"Amit Bhadana","cat":"YouTuber","gender":"m"},
+{"id":"ashish-chanchlani","name":"Ashish Chanchlani","cat":"YouTuber","gender":"m"},
+{"id":"bhuvan-bam","name":"Bhuvan Bam","cat":"YouTuber","gender":"m"},
+{"id":"carryminati","name":"CarryMinati","cat":"YouTuber","gender":"m"},
+{"id":"dhruv-rathee","name":"Dhruv Rathee","cat":"YouTuber","gender":"m"},
+{"id":"elvish-yadav","name":"Elvish Yadav","cat":"YouTuber","gender":"m"},
+{"id":"gaurav-taneja","name":"Gaurav Taneja","cat":"YouTuber","gender":"m"},
+{"id":"harsh-beniwal","name":"Harsh Beniwal","cat":"YouTuber","gender":"m"},
+{"id":"kunal-kamra","name":"Kunal Kamra","cat":"YouTuber","gender":"m"},
+{"id":"mortal","name":"Mortal","cat":"YouTuber","gender":"m"},
+{"id":"mythpat","name":"Mythpat","cat":"YouTuber","gender":"m"},
+{"id":"prajakta-koli","name":"Prajakta Koli","cat":"YouTuber","gender":"f"},
+{"id":"raj-shamani","name":"Raj Shamani","cat":"YouTuber","gender":"m"},
+{"id":"rajiv-malhotra","name":"Rajiv Malhotra","cat":"YouTuber","gender":"m"},
+{"id":"ranveer-allahbadia","name":"Ranveer Allahbadia","cat":"YouTuber","gender":"m"},
+{"id":"samay-raina","name":"Samay Raina","cat":"YouTuber","gender":"m"},
+{"id":"sandeep-maheshwari","name":"Sandeep Maheshwari","cat":"YouTuber","gender":"m"},
+{"id":"sourav-joshi","name":"Sourav Joshi","cat":"YouTuber","gender":"m"},
+{"id":"tanmay-bhat","name":"Tanmay Bhat","cat":"YouTuber","gender":"m"},
+{"id":"technical-guruji","name":"Technical Guruji","cat":"YouTuber","gender":"m"},
+{"id":"techno-gamerz","name":"Techno Gamerz","cat":"YouTuber","gender":"m"},
+{"id":"triggered-insaan","name":"Triggered Insaan","cat":"YouTuber","gender":"m"},
+{"id":"vivek-bindra","name":"Vivek Bindra","cat":"YouTuber","gender":"m"},
+{"id":"akshat-shrivastava","name":"Akshat Shrivastava","cat":"Influencer","gender":"m"},
+{"id":"alakh-pandey","name":"Alakh Pandey","cat":"Influencer","gender":"m"},
+{"id":"aman-gupta","name":"Aman Gupta","cat":"Influencer","gender":"m"},
+{"id":"ankit-baiyanpuria","name":"Ankit Baiyanpuria","cat":"Influencer","gender":"m"},
+{"id":"ankur-warikoo","name":"Ankur Warikoo","cat":"Influencer","gender":"m"},
+{"id":"anupam-mittal","name":"Anupam Mittal","cat":"Influencer","gender":"m"},
+{"id":"ashneer-grover","name":"Ashneer Grover","cat":"Influencer","gender":"m"},
+{"id":"baba-ramdev","name":"Baba Ramdev","cat":"Influencer","gender":"m"},
+{"id":"dhirendra-krishna-shastri","name":"Dhirendra Krishna Shastri","cat":"Influencer","gender":"m"},
+{"id":"dolly-chaiwala","name":"Dolly Chaiwala","cat":"Influencer","gender":"m"},
+{"id":"gaur-gopal-das","name":"Gaur Gopal Das","cat":"Influencer","gender":"m"},
+{"id":"jaya-kishori","name":"Jaya Kishori","cat":"Influencer","gender":"f"},
+{"id":"khan-sir","name":"Khan Sir","cat":"Influencer","gender":"m"},
+{"id":"kusha-kapila","name":"Kusha Kapila","cat":"Influencer","gender":"f"},
+{"id":"nikhil-kamath","name":"Nikhil Kamath","cat":"Influencer","gender":"m"},
+{"id":"orry","name":"Orry","cat":"Influencer","gender":"m"},
+{"id":"pranjal-kamra","name":"Pranjal Kamra","cat":"Influencer","gender":"m"},
+{"id":"rachana-ranade","name":"Rachana Ranade","cat":"Influencer","gender":"f"},
+{"id":"sadhguru","name":"Sadhguru","cat":"Influencer","gender":"m"},
+{"id":"sharan-hegde","name":"Sharan Hegde","cat":"Influencer","gender":"m"},
+{"id":"uorfi-javed","name":"Uorfi Javed","cat":"Influencer","gender":"f"},
+{"id":"vikas-divyakirti","name":"Vikas Divyakirti","cat":"Influencer","gender":"m"}
+]/*PEOPLE_END*/;
+
+const CATS = ['All','TV Anchor','Journalist','YouTuber','Influencer'];
+const EMO = {
+  m: ['👨','👨‍🦱','👨‍🦰','👱‍♂️','👨‍🦳','👨‍🦲','🧔','🧔‍♂️','👳‍♂️','🤵‍♂️','👨‍💼','🕺'],
+  f: ['👩','👩‍🦱','👩‍🦰','👱‍♀️','👩‍🦳','👩‍🦲','🧕','👩‍💼','💁‍♀️','🙋‍♀️']
+};
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const store = {
+  get:(k,d)=>{try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch{return d}},
+  set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}}
+};
+
+/* Instagram-style counts: 999 -> 1K -> 12K -> 1M */
+function fmt(n){
+  n=Math.max(0,Math.floor(+n||0));
+  if(n<1000) return String(n);
+  if(n<1e6){
+    const k=n/1000;
+    if(Math.round(k)>=1000) return '1M';
+    return (k<10?String(+k.toFixed(1)):String(Math.round(k)))+'K';
+  }
+  return String(+(n/1e6).toFixed(1))+'M';
+}
+
+/* Stable "random" emoji per person, picked by gender */
+const hash = s => {let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))>>>0;return h};
+const emojiFor = p => { const a=EMO[p.gender==='f'?'f':'m']; return a[hash(p.id)%a.length]; };
+const avatar = (p,extra='') => `<div class="av" style="background:hsl(${hash(p.name)%360} 75% 88%)" aria-hidden="true">${emojiFor(p)}${extra}</div>`;
+const MEDAL = ['🥇','🥈','🥉'];
+
+/* ================= STATE ================= */
+let ROSTER=[], BY_ID={};
+let counts={}, liked=new Set(store.get('jm_liked',[]));
+let queue=store.get('jm_queue',{});            // pending votes: {personId: 'vote'|'unvote'}
+let cat='All', query='', sortBy='top', hotId=null, shownVotes=0;
+const busy=new Set();
+const API=(CONFIG.API_URL||'').replace(/\/$/,'');
+const LIVE=!!API;
+let voter=store.get('jm_voter',null);
+if(!voter||!/^[a-f0-9]{32}$/.test(voter)){
+  voter=[...crypto.getRandomValues(new Uint8Array(16))].map(b=>b.toString(16).padStart(2,'0')).join('');
+  store.set('jm_voter',voter);
+}
+
+/* ================= API ================= */
+function setNote(msg){const n=$('#note');n.textContent=msg||'';n.hidden=!msg}
+
+async function loadCounts(){
+  if(!LIVE){counts=store.get('jm_demo',{});setNote('Demo mode: votes stay on this device. Set API_URL in index.html to go live for everyone.');return}
+  let fresh=null, note='';
+  try{
+    const r=await fetch(API+'/api/votes');
+    if(!r.ok) throw new Error('http '+r.status);
+    const j=await r.json();
+    fresh=j.counts||{}; store.set('jm_cache',fresh);
+    if(j.degraded) note='Scoreboard is catching its breath. Showing the last saved scores.';
+  }catch{
+    note='Server is resting (free daily limit) or you are offline. Showing the last saved scores.';
+    if(!Object.keys(counts).length) fresh=store.get('jm_cache',{});   // cold start while offline
+  }
+  if(fresh){
+    counts=fresh;
+    // show pending, not-yet-synced votes on top of the server numbers
+    for(const [id,act] of Object.entries(queue)) counts[id]=Math.max(0,(counts[id]||0)+(act==='vote'?1:-1));
+  }
+  const waiting=Object.keys(queue).length;
+  if(waiting) note=(note?note+' ':'')+`${waiting} vote${waiting>1?'s are':' is'} saved on your device and will sync automatically.`;
+  setNote(note);
+}
+
+/* returns 'ok' | 'retry' | 'drop' */
+async function sendVote(id,action,quiet){
+  const say=m=>{if(!quiet)toast(m)};
+  try{
+    const r=await fetch(API+'/api/vote',{method:'POST',headers:{'Content-Type':'application/json','X-Voter':voter},body:JSON.stringify({id,action})});
+    if(r.ok){
+      const j=await r.json();
+      if(queue[id]===action){delete queue[id];store.set('jm_queue',queue)}
+      if(typeof j.count==='number'){
+        counts[id]=j.count;
+        const c=store.get('jm_cache',{});c[id]=j.count;store.set('jm_cache',c);   // keep the offline copy current
+        refreshCard(id);renderStats();
+      }
+      return 'ok';
+    }
+    const j=await r.json().catch(()=>({}));
+    if(r.status===429||r.status===503){
+      say(j.message||(r.status===429?'Easy there! Too many votes. Saved on your device, will sync later.':'Server is resting. Saved on your device, will sync later.'));
+      return 'retry';
+    }
+    delete queue[id]; store.set('jm_queue',queue);   // permanent rejection: undo locally
+    action==='vote'?liked.delete(id):liked.add(id); store.set('jm_liked',[...liked]);
+    say("That vote couldn't be recorded."); return 'drop';
+  }catch{
+    say('You seem offline. Saved on your device, will sync later.'); return 'retry';
+  }
+}
+async function flushQueue(){
+  for(const [id,action] of Object.entries(queue)){
+    if(busy.has(id)) continue;
+    const r=await sendVote(id,action,true);
+    if(r==='retry') return false;
+    refreshCard(id);
+  }
+  return true;
+}
+
+/* ================= RENDER ================= */
+const siteUrl=()=>CONFIG.SITE_URL||location.href.split('#')[0];
+const sorted=()=>ROSTER.filter(p=>(counts[p.id]||0)>0).sort((a,b)=>(counts[b.id]||0)-(counts[a.id]||0)||a.name.localeCompare(b.name));
+const rankMap=()=>{const m={};sorted().forEach((p,i)=>m[p.id]=i+1);return m};
+const maxCount=()=>Math.max(1,...Object.values(counts).map(v=>+v||0));
+const SHARE_SVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7M16 6l-4-4-4 4M12 2v14"/></svg>';
+const likeBtn=(p,on,big)=>`<button class="like ${on?'on':''}" data-like="${esc(p.id)}" aria-pressed="${on}" aria-label="Vote for ${esc(p.name)}"><span class="e">🤥</span>${big?'<span class="t t-off">Call cap</span><span class="t t-on">Voted ✓</span>':''}<span class="c">${fmt(counts[p.id]||0)}</span></button>`;
+
+function cardHTML(p,rk,max){
+  const on=liked.has(p.id);
+  const badge=rk?`<span class="rank">${rk<=3?MEDAL[rk-1]:'#'+rk}</span>`:'';
+  return `<article class="card ${on?'mine':''}" data-id="${esc(p.id)}">
+    ${avatar(p,badge)}
+    <div class="info"><h3>${esc(p.name)}</h3>
+      <div class="sub"><span class="cat">${esc(p.cat)}</span><button class="share" data-share="${esc(p.id)}" aria-label="Share ${esc(p.name)}">${SHARE_SVG}</button></div>
+      <div class="meter" aria-hidden="true"><i style="width:${Math.round((counts[p.id]||0)/max*100)}%"></i></div></div>
+    <div class="act">${likeBtn(p,on)}</div>
+  </article>`;
+}
+function renderGrid(){
+  const rm=rankMap(), max=maxCount();
+  const list=ROSTER.filter(p=>(cat==='All'||p.cat===cat)&&p.name.toLowerCase().includes(query));
+  if(sortBy==='az') list.sort((a,b)=>a.name.localeCompare(b.name));
+  else if(sortBy==='mine') list.sort((a,b)=>(liked.has(b.id)-liked.has(a.id))||((counts[b.id]||0)-(counts[a.id]||0))||a.name.localeCompare(b.name));
+  else list.sort((a,b)=>(counts[b.id]||0)-(counts[a.id]||0)||a.name.localeCompare(b.name));
+  $('#count').textContent=list.length+(list.length===1?' name':' names');
+  $('#grid').innerHTML=list.length?list.map(p=>cardHTML(p,rm[p.id]&&rm[p.id]<=100?rm[p.id]:null,max)).join(''):'<div class="empty">No match. Try another spelling, or add the name from the “Add a name” tab.</div>';
+}
+function setNum(el,to){
+  const from=shownVotes; shownVotes=to;
+  const calm=typeof matchMedia==='function'&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(typeof requestAnimationFrame!=='function'||from===to||calm){el.textContent=fmt(to);return}
+  const t0=performance.now(), dur=600;
+  const step=t=>{const k=Math.min(1,(t-t0)/dur);el.textContent=fmt(Math.round(from+(to-from)*(1-Math.pow(1-k,3))));if(k<1)requestAnimationFrame(step)};
+  requestAnimationFrame(step);
+}
+function renderStats(){
+  setNum($('#sVotes'),Object.values(counts).reduce((a,b)=>a+(+b||0),0));
+  $('#sPeople').textContent=ROSTER.length;
+  $('#sMine').textContent=fmt(liked.size);
+}
+function renderBoard(){
+  const top=sorted().slice(0,25);
+  if(!top.length){$('#podium').innerHTML='';$('#rows').innerHTML='<div class="empty">No votes yet.<br>Be the first to cast one 🤥</div>';return}
+  const max=Math.max(1,counts[top[0].id]||0);
+  const rows=(list,start)=>list.map((p,i)=>`<div class="row"><i style="width:${Math.round((counts[p.id]||0)/max*100)}%"></i><span class="n">${start+i}</span><span class="nm">${esc(p.name)}<small>${esc(p.cat)}</small></span><b>${fmt(counts[p.id]||0)}</b></div>`).join('');
+  if(top.length<3){$('#podium').innerHTML='';$('#rows').innerHTML=rows(top,1);return}
+  const pod=[top[1],top[0],top[2]];
+  $('#podium').innerHTML=pod.map((p,i)=>{const r=[2,1,3][i];return `<div class="pod p${r}">${r===1?'<span class="crown">👑</span>':''}${avatar(p)}<h3>${esc(p.name)}</h3><b>${fmt(counts[p.id]||0)}</b><small>${MEDAL[r-1]} #${r}</small></div>`}).join('');
+  $('#rows').innerHTML=rows(top.slice(3),4);
+}
+function refreshCard(id){
+  const max=maxCount(), on=liked.has(id);
+  document.querySelectorAll(`[data-id="${id}"]`).forEach(c=>{
+    const b=c.querySelector('.like'), n=c.querySelector('.c'), m=c.querySelector('.meter i');
+    if(b){b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)}
+    c.classList.toggle('mine',on&&c.classList.contains('card'));
+    if(n){const t=fmt(counts[id]||0);if(n.textContent!==t){n.textContent=t;n.classList.remove('bump');void n.offsetWidth;n.classList.add('bump')}}
+    if(m) m.style.width=Math.round((counts[id]||0)/max*100)+'%';
+  });
+}
+
+/* Hot seat: one-tap quick voting, "Next" shows someone else */
+function renderHot(){
+  const p=BY_ID[hotId]; const el=$('#hot'); if(!p){el.innerHTML='';return}
+  el.innerHTML=`<div class="hot-body" data-id="${esc(p.id)}">${avatar(p)}<h3>${esc(p.name)}</h3><span class="cat">${esc(p.cat)}</span>
+    <div class="hot-actions">${likeBtn(p,liked.has(p.id),true)}<button class="skip" data-hot-next>Next →</button></div></div>`;
+}
+function pickHot(){
+  const pool=ROSTER.filter(p=>p.id!==hotId&&!liked.has(p.id));
+  const from=pool.length?pool:ROSTER.filter(p=>p.id!==hotId);
+  if(!from.length) return;
+  hotId=from[Math.floor(Math.random()*from.length)].id;
+  renderHot();
+}
+
+/* ================= VOTING ================= */
+function burst(x,y){
+  for(let i=0;i<6;i++){const s=document.createElement('span');s.className='float';s.textContent='🤥';
+    s.style.left=(x+(Math.random()*70-35))+'px';s.style.top=(y-10)+'px';s.style.animationDelay=(i*55)+'ms';
+    document.body.appendChild(s);setTimeout(()=>s.remove(),1300)}
+}
+async function toggleVote(id,btn){
+  if(busy.has(id)) return;
+  const had=liked.has(id), action=had?'unvote':'vote';
+  had?liked.delete(id):liked.add(id);
+  counts[id]=Math.max(0,(counts[id]||0)+(had?-1:1));
+  store.set('jm_liked',[...liked]);
+  refreshCard(id); renderStats();
+  if(!had){
+    if(btn){const r=btn.getBoundingClientRect();burst(r.left+r.width/2,r.top)}
+    if(navigator.vibrate) navigator.vibrate(14);
+  }
+  if(!LIVE){store.set('jm_demo',counts);return}
+  queue[id]=action; store.set('jm_queue',queue);   // saved first, removed once the server confirms
+  busy.add(id);
+  try{await sendVote(id,action,false)}finally{busy.delete(id);refreshCard(id)}
+}
+
+/* ================= SHARE ================= */
+function openShare(title,text){
+  const url=siteUrl(), full=text+' '+url;
+  if(navigator.share){navigator.share({title,text,url}).catch(()=>{});return}
+  $('#dTitle').textContent=title;
+  $('#dWa').href='https://wa.me/?text='+encodeURIComponent(full);
+  $('#dX').href='https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(url);
+  $('#dTg').href='https://t.me/share/url?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(text);
+  $('#dCopy').onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(full);toast('Link copied')};
+  $('#dlg').showModal();
+}
+let toastTimer;
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('on'),2800)}
+const SITE_TEXT='Your feed, your verdict. Vote anonymously on who misleads you the most 🤥 No cap.';
+
+/* ================= EVENTS ================= */
+document.addEventListener('click',e=>{
+  const l=e.target.closest('[data-like]'); if(l){toggleVote(l.dataset.like,l);return}
+  const s=e.target.closest('[data-share]'); if(s){const p=BY_ID[s.dataset.share];if(p)openShare('JhoothMeter',`My vote's in on ${p.name}. Your turn 🧢 Vote anonymously.`);return}
+  if(e.target.closest('[data-hot-next]')){pickHot();return}
+  const g=e.target.closest('[data-go]'); if(g){go(g.dataset.go)}
+});
+$('#fab').onclick=()=>openShare('JhoothMeter',SITE_TEXT);
+$('#dClose').onclick=()=>$('#dlg').close();
+$('#q').addEventListener('input',e=>{query=e.target.value.trim().toLowerCase();renderGrid()});
+$('#sort').addEventListener('change',e=>{sortBy=e.target.value;renderGrid()});
+$('#chips').innerHTML=CATS.map(c=>`<button class="chip ${c==='All'?'on':''}" data-cat="${c}">${c}</button>`).join('');
+$('#chips').addEventListener('click',e=>{const b=e.target.closest('[data-cat]');if(!b)return;cat=b.dataset.cat;
+  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c===b));renderGrid()});
+
+function go(page){
+  if(!['home','board','join','about'].includes(page)) page='home';
+  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('on',p.id==='p-'+page));
+  document.querySelectorAll('[data-go]').forEach(b=>b.classList.toggle('on',b.dataset.go===page));
+  if(page==='board') renderBoard();
+  if(location.hash!=='#'+page) history.replaceState(null,'','#'+page);
+  window.scrollTo({top:0});
+}
+$('#startVote').addEventListener('click',e=>{e.preventDefault();go('home');setTimeout(()=>$('#list').scrollIntoView({behavior:'smooth'}),30)});
+window.addEventListener('hashchange',()=>go(location.hash.slice(1)));
+
+/* ================= INIT ================= */
+const repo=CONFIG.REPO_URL.replace(/\/$/,'');
+$('#ghTop').href=repo; $('#joinRepo').href=repo; $('#aboutRepo').href=repo;
+$('#joinIssue').href=repo+'/issues/new?template=add-name.yml';
+$('#joinEdit').href=repo+'/edit/main/people.json';
+$('#tk').innerHTML=('<span>🧢 No cap zone</span><span>✊ Facts over followers</span><span>📵 Forward karne se pehle check kar</span><span>🗳️ Your vote. Zero login.</span><span>🫵 Your feed, your verdict</span><span>🔥 Receipts or it didn\'t happen</span>').repeat(8);
+
+async function refresh(){
+  if(LIVE) await flushQueue();
+  await loadCounts();
+  renderStats();
+  if(hotId) refreshCard(hotId);
+  if($('#p-board').classList.contains('on')) renderBoard();
+  else if(document.activeElement&&document.activeElement.id!=='q') renderGrid();
+}
+(async()=>{
+  let raw;
+  try{
+    const r=await fetch('people.json'); if(!r.ok) throw new Error('http '+r.status);
+    raw=await r.json();
+    store.set('jm_roster',raw);                       // keep a copy for offline visits
+  }catch{
+    raw=store.get('jm_roster',null);                  // last good copy from this device
+    if(!Array.isArray(raw)||!raw.length) raw=FALLBACK_PEOPLE;   // built-in backup (also works from file://)
+  }
+  ROSTER=(Array.isArray(raw)?raw:[]).filter(p=>p&&typeof p.id==='string'&&typeof p.name==='string');
+  BY_ID=Object.fromEntries(ROSTER.map(p=>[p.id,p]));
+  if(!ROSTER.length){$('#grid').innerHTML='<div class="empty">Could not load the list. Refresh in a moment.</div>';return}
+  await refresh();
+  renderGrid();
+  pickHot();
+  go(location.hash.slice(1)||'home');
+  setInterval(refresh,60000);
+})();
+</script>
+</body>
+</html>
